@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Laporan Dokumen Harian</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">WebApps</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Create","Document")">Input Dokumen<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ReviewHarian", "Document")">Review Hari ini</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("YearlyIndex", "Document")">Status</a>
+                </li>
+                <li>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Laporan Dokumen</a>
+                        <div class="dropdown-menu" style="">
+                            <a class="dropdown-item" href="@Url.Action("LaporanHarian", "Document")">Harian</a>
+                            <a class="dropdown-item" href="@Url.Action("LaporanBulan", "Document")">Bulanan</a>
+                            <a class="dropdown-item" href="@Url.Action("LaporanTriwulan", "Document")">Triwulan</a>
+                            <a class="dropdown-item" href="@Url.Action("LaporanSemester", "Document")">Semester</a>
+                            <a class="dropdown-item" href="@Url.Action("LaporanTahun", "Document")">Tahunan</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Document")">Semua Dokumen</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Data Pegawai</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="@Url.Action("Create", "Worker")">Tambah Baru</a>
+                        <a class="dropdown-item" href="@Url.Action("WorkingWorker", "Worker")">Lihat Petugas Aktif</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Worker")">Lihat Semua Petugas</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Galeri</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="@Url.Action("Create", "DocImages")">Tambah Baru</a>
+                        <a class="dropdown-item" href="@Url.Action("LaporanHarian", "DocImages")">Lihat Dokumentasi Harian</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Index", "DocImages")">Lihat Semua Galeri</a>
+                    </div>
+                </li>
+                @Html.Partial("_LoginPartial")
+
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid body-content">
+        <br />
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApps.ViewModel.Yearly>
+
+@{
+    ViewBag.Title = "Dokumen Terkini";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2>Laporan Update tahun berjalan (@DateTime.Now.Year)</h2>
+        <table class="table-sm table-bordered col-md-12" id="myTable">
+            <thead class="table-primary">
+                <tr>
+                    <th class="col-md-auto">Bulan</th>
+                    <th class="col-md-auto">Jumlah Dokumen</th>
+                    <th class="col-md-auto">Jumlah Dokumen Sesuai</th>
+                    <th class="col-md-auto">Jumlah Dokumen Sesuai Catatan</th>
+                    <th class="col-md-auto">Jumlah Dokumen Tidak Sesuai</th>
+                    <th class="col-md-auto">Persentase Tidak Sesuai</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.nmrBulan) > @Html.ActionLink("Detil", "LaporanBulan", new { bulan = item.nmrBulan }) </td>
+                        <td>@Html.DisplayFor(modelItem => item.jmlDoc)</td>
+                        <td>@Html.DisplayFor(modelItem => item.jmlDss)</td>
+                        <td>@Html.DisplayFor(modelItem => item.jmlDsc)</td>
+                        <td>@Html.DisplayFor(modelItem => item.jmlDts)</td>
+                        <td>@Html.DisplayFor(modelItem => item.percentTS)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h3>Capaian:</h3>
+        <table class="col-md-3">
+            <tr>
+                <td>Dokumen Sesuai</td>
+                <td>:</td>
+                <td>@Model.Sum(d => d.jmlDss)</td>
+            </tr>
+            <tr>
+                <td>Dokumen Sesuai Catatan</td>
+                <td>:</td>
+                <td>@Model.Sum(d => d.jmlDsc)</td>
+            </tr>
+            <tr>
+                <td>Dokumen Tidak Sesuai</td>
+                <td>:</td>
+                <td>@Model.Sum(d => d.jmlDts)</td>
+            </tr>
+            <tr>
+                <td>Jumlah Dokumen</td>
+                <td>:</td>
+                <td>@Model.Sum(d => d.jmlDoc)</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+

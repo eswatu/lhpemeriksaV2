@@ -1,0 +1,96 @@
+﻿@model WebApps.Models.DocImages
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">Perhatian!</h4>
+    <p class="mb-0"><a href="#" class="alert-link">Apabila setiap melakukan penghapusan 1 gambar dari halaman ini, selalu lakukan Refresh /F5 untuk mengupdate tampilan</a>.</p>
+</div>
+<div>
+    <a href="@Url.Action("Index","DocImages")">
+        <button type="button" class="btn btn-info">Kembali Ke Menu</button>
+    </a>
+</div>
+
+@using (Html.BeginForm("Edit","DocImages",null, FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.DocImagesID)
+    <fieldset>
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DocID, "DocID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DocID", null, htmlAttributes: new { @class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.DocID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nomorKontainer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nomorKontainer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nomorKontainer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="editor-field">
+                <div class="form-group">
+                    <p>File:</p>
+                    <div class="col-md-10">
+                        <input type="file" name="file" multiple="multiple" accept="image/*" />
+                    </div>
+                </div>                <ul class="attachment">
+                    @foreach (var item in Model.ImgDetail)
+                    {
+                        <li>
+                                <img src="@Url.Action("DownImg",new { DocDir = Model.direktori, fileName = item.FileName})" alt="Foto kontener" height="80" />
+                            <a href="javascript:void(0);" data-id="@item.Id" class="deleteItem">Hapus</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+<script>
+    $('.deleteItem').click(function (e) {
+               e.preventDefault();
+               var $ctrl = $(this);
+               if (confirm('Yakin Menghapus file ini?')) {
+                   $.ajax({
+                       url: '@Url.Action("DeleteFile")',
+                       type: 'POST',
+                       data: { id: $(this).data('id') }
+                   }).done(function (data) {                  
+                       if (data.Result == "OK") {
+                           $ctrl.closest('li').remove();
+                           $window.location.reload(true); 
+                       }
+                       else if (data.Result.Message) {
+                           alert(data.Result.Message);
+                       }
+                   }).fail(function () {
+                       alert("Ada yang salah, tanya admin.");
+                   })
+ 
+               }
+           });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

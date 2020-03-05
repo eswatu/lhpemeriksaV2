@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Laporan Triwulan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form action="/Document/LaporanTriwulan" method="get">
+    <fieldset>
+        <div class="row-cols-sm-2">
+            Triwulan <select id="tw" name="tw">
+                <option selected value=""></option>
+                <option value="1">I</option>
+                <option value="2">II</option>
+                <option value="3">III</option>
+                <option value="4">IV</option>
+            </select>
+            <input type="number" maxlength="4" placeholder="4 digit tahun" id="tahun" name="tahun" class="form-control-sm" />
+            <button type="submit" class="btn-sm btn-primary">Lihat</button>
+        </div>
+    </fieldset>
+</form>
+<h3>Laporan : @ViewBag.nama</h3>
+@Html.Partial("_DocumentReport")

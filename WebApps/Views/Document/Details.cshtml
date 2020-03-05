@@ -1,0 +1,74 @@
+﻿@model WebApps.Models.Document
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Document</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Worker.WorkerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Worker.WorkerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocOwner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocOwner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocWorkDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocWorkDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Keterangan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Keterangan)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DocID }) |
+    @Html.ActionLink("Back to List", "ReviewHarian")
+</p>

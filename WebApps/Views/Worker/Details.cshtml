@@ -1,0 +1,42 @@
+﻿@model WebApps.Models.Worker
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Worker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkerActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkerActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkerFree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkerFree)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

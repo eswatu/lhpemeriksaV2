@@ -1,0 +1,61 @@
+﻿@model List<WebApps.ViewModel.Report>
+
+@{
+    int i = 1;
+}
+<link rel="stylesheet" href="~/Scripts/TableSaw/tablesaw.css" />
+<script src="~/Scripts/TableSaw/tablesaw.jquery.js"></script>
+<br />
+<h4>Total Dilaporkan:@Model.Count()</h4>
+<table class="table-sm table-bordered table-striped table-hover tablesaw tablesaw-stack" id="myTable">
+    <thead class="table-primary">
+        <tr class="col-md-auto">
+            <th>Nomor</th>
+            <th scope="col" onclick="sortTable(1)" data-tablesaw-priority="persist">Nama Pemeriksa </th>
+            <th scope="col" onclick="sortTable(2)" data-tablesaw-priority="1">Jumlah Dokumen </th>
+            <th scope="col" onclick="sortTable(3)" data-tablesaw-priority="2">Dokumen Sesuai </th>
+            <th scope="col" onclick="sortTable(4)" data-tablesaw-priority="3">Dokumen Sesuai Catatan </th>
+            <th scope="col" onclick="sortTable(5)" data-tablesaw-priority="4">Dokumen Tidak Sesuai </th>
+            <th scope="col" onclick="sortTable(6)" data-tablesaw-priority="5">Persentase</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <b class="tablesaw-cell-label">#</b>
+                    <span class="tablesaw-cell-content">@i</span>
+                </td>
+                <td>
+                    <b class="tablesaw-cell-label">Petugas</b>
+                    <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.namaPegawai)</span>
+                </td>
+                <td>
+                    <b class="tablesaw-cell-label">Jumlah Dokumen</b>
+                    <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.jmlDoc)</span>
+                </td>
+                <td>
+                    <b class="tablesaw-cell-label">Sesuai</b>
+                    <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.jmlDss)</span>
+                </td>
+                <td>
+                    <b class="tablesaw-cell-label">Sesuai Catatan</b>
+                    <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.jmlDsc)</span>
+                </td>
+                <td>
+                    <b class="tablesaw-cell-label">Tidak Sesuai</b>
+                    <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.jmlDts)</span>
+                </td>
+                <td>
+                    <b class="tablesaw-cell-label">%</b>
+                    <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.percentTS)%</span>
+                </td>
+                @{ i++;}
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+<br />

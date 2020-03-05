@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApps.Models.Worker>
+
+@{
+    ViewBag.Title = "Daftar seluruh Pemeriksa";
+}
+
+<h2>Daftar Seluruh Pegawai</h2>
+
+<p>
+    @Html.ActionLink("Tambah Baru", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkerActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkerFree)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerFree)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.WorkerID }) |
+            <a href="@Url.Action("Index", "Document", new { pegawe = item.WorkerID })">History</a>
+        </td>
+    </tr>
+}
+
+</table>

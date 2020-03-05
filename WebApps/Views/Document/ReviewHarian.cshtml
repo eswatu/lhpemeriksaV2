@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebApps.Models.Document>
+
+@{
+    ViewBag.Title = "Dokumen Harian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+<link rel="stylesheet" href="~/Scripts/TableSaw/tablesaw.css" />
+<script src="~/Scripts/TableSaw/tablesaw.js"></script>
+@*<script src="~/Scripts/TableSaw/tablesaw-init.js" ></script>*@
+
+<div class="row justify-content-center">
+    <div class="col-md-11">
+        <a href="@Url.Action("Create","Document")">
+            <button type="button" class="btn btn-primary">Buat Baru</button>
+        </a>
+        <div class="row" style="float:none; margin:0 auto;">
+            <div class="col-md-6 left">
+                <h4 style="text-align:left">Laporan Hari Ini:@Model.Count()</h4>
+            </div>
+            <div class="col-md-6 right">
+                <h4 style="text-align:right">@System.DateTime.Now.Date.ToLongDateString()</h4>
+            </div>
+        </div>
+        <div class="docs-main">
+            <table class="tablesaw tablesaw-stack" data-tablesaw-mode="stack" id="myTable">
+                <thead class="table-primary">
+                    <tr>
+                        <th onclick="sortTable(0)" scope="col" data-tablesaw-priority="persist">Nomor</th>
+                        <th onclick="sortTable(1)" scope="col" data-tablesaw-priority="1">@Html.DisplayNameFor(model => model.DocNumber)</th>
+                        <th onclick="sortTable(2)" scope="col" data-tablesaw-priority="2">@Html.DisplayNameFor(model => model.DocDate)</th>
+                        <th onclick="sortTable(3)" scope="col" data-tablesaw-priority="3">@Html.DisplayNameFor(model => model.DocOwner)</th>
+                        <th onclick="sortTable(4)" scope="col" data-tablesaw-priority="4">@Html.DisplayNameFor(model => model.Worker.WorkerName)</th>
+                        <th onclick="sortTable(5)" scope="col" data-tablesaw-priority="5">@Html.DisplayNameFor(model => model.Status)</th>
+                        <th onclick="sortTable(6)" scope="col" data-tablesaw-priority="6">@Html.DisplayNameFor(model => model.Keterangan)</th>
+                        <th scope="col" data-tablesaw-priority="7">Tindakan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="@(item.Status == WebApps.Models.docStatus.tidak_sesuai ? "table-danger":"")">
+                            <td class="table-info">
+                                <b class="tablesaw-cell-label table-primary">#</b>
+                                <span class="tablesaw-cell-content">@i</span>
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label table-primary">@Html.DisplayNameFor(model => model.DocNumber)</b>
+                                <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.DocNumber)</span>
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label table-primary">@Html.DisplayNameFor(model => model.DocDate)</b>
+                                <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.DocDate)</span>
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label table-primary">@Html.DisplayNameFor(model => model.DocOwner)</b>
+                                <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.DocOwner)</span>
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label table-primary">@Html.DisplayNameFor(model => model.Worker.WorkerName)</b>
+                                <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.Worker.WorkerName)</span>
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label table-primary">@Html.DisplayNameFor(model => model.Status)</b>
+                                <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.Status)</span>
+
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label table-primary">@Html.DisplayNameFor(model => model.Keterangan)</b>
+                                <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.Keterangan)</span>
+                            </td>
+                            <td>
+                                <b class="tablesaw-cell-label">Tindakan</b>
+                                <span class="tablesaw-cell-content">
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Create","DocImages", new { docid = item.DocID})"><button type="button" class="btn-sm btn-info">Upload</button></a>
+                                        <button type="button" class="btn-sm btn-warning">@Html.ActionLink("Edit", "Edit", new { id = item.DocID })</button>
+                                        <button type="button" class="btn-sm btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.DocID })</button>
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<WebApps.Models.Document>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Semua Dokumen";
+    int i = 1;
+}
+<br />
+
+
+<div class="row justify-content-center">
+    <div class="col-md-12">
+
+        <form class="form-inline active-cyan-3 active-cyan-4">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Cari Nama Perusahaan" aria-label="Search" name="searchString">
+            <button type="submit" class="btn-sm btn-primary">Cari</button>
+        </form>
+
+        <h2>Semua Dokumen : @ViewBag.nmPegawe</h2>
+
+        <a href="@Url.Action("Create", "Document")">
+            <button type="button" class="btn btn-outline-primary">Buat Baru</button>
+        </a>
+        <br />
+
+        <table class="table-sm table-bordered table-striped table-hover">
+            <thead class="table-primary">
+                <tr class="table-primary">
+                    <th>#</th>
+                    <th>Nama Petugas</th>
+                    <th>
+                        @Html.ActionLink("Nomor Dokumen", "Index", new { sortOrder = ViewBag.DocNumber, currentFilter = ViewBag.CurrentFilter, pegawe = ViewBag.dtpeg })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Tanggal Dokumen", "Index", new { sortOrder = ViewBag.DocDate, currentFilter = ViewBag.CurrentFilter, pegawe = ViewBag.dtpeg })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Pemilik", "Index", new { sortOrder = ViewBag.DocOwner, currentFilter = ViewBag.CurrentFilter, pegawe = ViewBag.dtpeg })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Tanggal Pelaporan", "Index", new { sortOrder = ViewBag.DocWorkDate, currentFilter = ViewBag.CurrentFilter, pegawe = ViewBag.dtpeg })
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Keterangan
+                    </th>
+                    <th>Tindakan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.DocWorkDate == DateTime.Today.Date ? "table-success" : "")">
+                        <td><b>@i</b></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Worker.WorkerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocOwner)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocWorkDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Keterangan)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="@Url.Action("Create","DocImages", new { documentID = item.DocID})"><button type="button" class="btn-sm btn-info">Upload</button></a>
+                                <button type="button" class="btn-sm btn-warning">@Html.ActionLink("Edit", "Edit", new { id = item.DocID })</button>
+                                <button type="button" class="btn-sm btn-info">@Html.ActionLink("Details", "Details", new { id = item.DocID })</button>
+                                <button type="button" class="btn-sm btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.DocID })</button>
+                            </div>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+        <div class="row col-md-6">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
+        <div class="row col-md-6">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+
+    </div>
+</div>
+<br />
+

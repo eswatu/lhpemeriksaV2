@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Laporan Tahunan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="/Document/LaporanTahun" method="get">
+    <fieldset>
+        <div class="row-cols-sm-2">
+
+            Tahun: <input type="number" maxlength="4" placeholder="4 digit tahun" id="tahun" name="tahun" class="form-control-sm" />
+            <button type="submit" class="btn-sm btn-primary">Lihat</button>
+        </div>
+    </fieldset>
+</form>
+<h3>@ViewBag.nama</h3>
+
+@Html.Partial("_DocumentReport")

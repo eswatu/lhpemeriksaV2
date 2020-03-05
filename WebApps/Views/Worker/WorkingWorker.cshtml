@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebApps.Models.Worker>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pegawai Aktif</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nama Pegawai
+        </th>
+        <th>
+            Status Aktif?
+        </th>
+        <th>
+            Dalam Cuti?
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerFree)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.WorkerID }) |
+            <a href="@Url.Action("Index", "Document", new { pegawe = item.WorkerID })">History</a> 
+        </td>
+    </tr>
+}
+
+</table>

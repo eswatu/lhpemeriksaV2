@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebApps.Models.Document>
+
+@{
+    ViewBag.Title = "Dokumen Harian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+<link rel="stylesheet" href="~/Scripts/TableSaw/tablesaw.css" />
+<script src="~/Scripts/TableSaw/tablesaw.jquery.js"></script>
+<link rel="stylesheet" href="~/Content/jquery-ui.css" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+<br />
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <form action="/Document/LaporanHarian" method="get">
+                <fieldset>
+                    <div class="row-cols-md-2">
+                        Tanggal <input type="text" id="tgl" name="tgl" class="form-control-sm dtpick" />
+                        <button type="submit" class="btn-sm btn-primary">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="row" style="float:none; margin:0 auto;">
+            <div class="col-md-6 left">
+                <h4 style="text-align:left">Jumlah Laporan:@Model.Count()</h4>
+            </div>
+            <div class="col-md-6 right">
+                <h4 style="text-align:right">@System.DateTime.Now.Date.ToLongDateString()</h4>
+            </div>
+        </div>
+        <table class="table-sm table-bordered table-striped table-hover tablesaw tablesaw-stack" id="myTable">
+            <thead class="table-primary">
+                <tr class="col-md-auto">
+                    <th onclick="sortTable(0)" data-tablesaw-priority="persist">Nomor</th>
+                    <th scope="col" onclick="sortTable(1)" data-tablesaw-priority="1">@Html.DisplayNameFor(model => model.DocNumber)</th>
+                    <th scope="col" onclick="sortTable(2)" data-tablesaw-priority="2">@Html.DisplayNameFor(model => model.DocDate)</th>
+                    <th scope="col" onclick="sortTable(3)" data-tablesaw-priority="3">@Html.DisplayNameFor(model => model.DocOwner)</th>
+                    <th scope="col" onclick="sortTable(4)" data-tablesaw-priority="4">@Html.DisplayNameFor(model => model.Worker.WorkerName)</th>
+                    <th scope="col" onclick="sortTable(5)" data-tablesaw-priority="5">@Html.DisplayNameFor(model => model.Status)</th>
+                    <th scope="col" onclick="sortTable(6)" data-tablesaw-priority="6">@Html.DisplayNameFor(model => model.Keterangan)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <b class="tablesaw-cell-label">#</b>
+                            <span class="tablesaw-cell-content">@i</span>
+                        </td>
+                        <td>
+                            <b class="tablesaw-cell-label">PIB</b>
+                            <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.DocNumber)</span>
+                        </td>
+                        <td>
+                            <b class="tablesaw-cell-label">Tanggal</b>
+                            <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.DocDate)</span>
+                        </td>
+                        <td>
+                            <b class="tablesaw-cell-label">Perusahaan</b>
+                            <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.DocOwner)</span>
+                        </td>
+                        <td>
+                            <b class="tablesaw-cell-label">Perusahaan</b>
+                            <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.Worker.WorkerName)</span>
+                        </td>
+                        <td>
+                            <b class="tablesaw-cell-label">Keputusan</b>
+                            <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.Status)</span>
+                        </td>
+                        <td>
+                            <b class="tablesaw-cell-label">Catatan</b>
+                            <span class="tablesaw-cell-content">@Html.DisplayFor(modelItem => item.Keterangan)</span>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.dtpick').datepicker({
+            dateFormat: "dd/mm/yy"
+        });
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+        }
+    });
+</script>
