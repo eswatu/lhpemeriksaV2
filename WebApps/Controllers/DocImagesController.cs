@@ -180,6 +180,7 @@ namespace WebApps.Controllers
         }
 
         // GET: DocImages/Create
+        [Authorize]
         public ActionResult Create(int? docid)
         {
 
@@ -201,6 +202,7 @@ namespace WebApps.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(DocImages docImage)
         {
             if (ModelState.IsValid)
@@ -245,6 +247,7 @@ namespace WebApps.Controllers
         }
 
         // GET: DocImages/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -269,6 +272,7 @@ namespace WebApps.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit(DocImages docImage)
         {
             string dirPath = SetCurrentFolder(docImage.direktori);
@@ -306,6 +310,7 @@ namespace WebApps.Controllers
         }
 
         // GET: DocImages/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -323,6 +328,7 @@ namespace WebApps.Controllers
         // POST: DocImages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             DocImages docImage = db.DocImages.Find(id);
@@ -356,6 +362,7 @@ namespace WebApps.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public JsonResult DeleteFile(string id)
         {
             if (String.IsNullOrEmpty(id))

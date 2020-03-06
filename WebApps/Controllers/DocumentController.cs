@@ -26,7 +26,6 @@ namespace WebApps.Controllers
             ViewBag.DocOwner = sortOrder == "DocOwner" ? "DocOwner_Desc" : "DocOwner";
             ViewBag.DocWorkDate = sortOrder == "DocWorkDate" ? "DocWorkDate_Desc" : "DocWorkDate";
 
-
             if (searchString != null)
             {
                 page = 1;
@@ -100,6 +99,7 @@ namespace WebApps.Controllers
         }
 
         // GET: Document/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.WorkerID = new SelectList(db.Workers.Where(w => (w.WorkerActive == true && w.WorkerFree == false)).OrderBy(w => w.WorkerName), "WorkerID", "WorkerName");
@@ -112,6 +112,7 @@ namespace WebApps.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "DocNumber,DocDate,DocOwner,DocWorkDate,WorkerID,Status,Keterangan")] Document document)
         {
             ViewBag.WorkerID = new SelectList(db.Workers.Where(w => (w.WorkerActive == true && w.WorkerFree == false)).OrderBy(w => w.WorkerName), "WorkerID", "WorkerName");
@@ -127,6 +128,7 @@ namespace WebApps.Controllers
         }
 
         // GET: Document/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -147,6 +149,7 @@ namespace WebApps.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "DocID,DocNumber,DocDate,DocOwner,DocWorkDate,WorkerID,Status,Keterangan")] Document document)
         {
             if (ModelState.IsValid)
@@ -159,6 +162,7 @@ namespace WebApps.Controllers
         }
 
         // GET: Document/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -176,6 +180,7 @@ namespace WebApps.Controllers
         // POST: Document/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Document document = db.Documents.Find(id);
