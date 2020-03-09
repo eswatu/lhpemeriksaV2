@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -10,6 +11,7 @@ namespace WebApps.Models
     public class ApplicationUser : IdentityUser
     {
         public string NamaLengkap { get; set; }
+        //public ICollection<ApplicationUserRole> UserRoles { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -30,5 +32,9 @@ namespace WebApps.Models
         {
             return new ApplicationDbContext();
         }
+
+
+
+        //public System.Data.Entity.DbSet<WebApps.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

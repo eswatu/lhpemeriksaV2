@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -212,6 +213,13 @@ namespace WebApps.Controllers
 
             base.Dispose(disposing);
         }
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<ActionResult> GetAllUser()
+        //{
+        //    var userList = await _userManager.Users.ToListAsync<ApplicationUser>();
+        //    return View(userList);
+        //}
 
         #region Helpers
         // Used for XSRF protection when adding external logins
