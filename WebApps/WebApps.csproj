@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DocImagesController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\EventImagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
     <Compile Include="Models\ApplicationUserRole.cs" />
+    <Compile Include="Models\EventImages.cs" />
     <Compile Include="Models\DocImages.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -393,6 +395,11 @@
     <Content Include="Views\Worker\Edit.cshtml" />
     <Content Include="Views\Worker\Index.cshtml" />
     <Content Include="Views\Worker\WorkingWorker.cshtml" />
+    <Content Include="Views\EventImages\Create.cshtml" />
+    <Content Include="Views\EventImages\Delete.cshtml" />
+    <Content Include="Views\EventImages\Details.cshtml" />
+    <Content Include="Views\EventImages\Edit.cshtml" />
+    <Content Include="Views\EventImages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Uploads\" />

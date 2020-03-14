@@ -1,0 +1,40 @@
+﻿@model WebApps.Models.EventImages
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EventImages</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.direktori)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direktori)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deskripsi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deskripsi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

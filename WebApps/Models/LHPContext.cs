@@ -17,6 +17,7 @@ namespace WebApps.Models
         public DbSet<Document> Documents { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<DocImages> DocImages { get; set; }
+        public DbSet<EventImages> EventImages { get; set; }
         public DbSet<ImgDetail> imgDetails { get; set; }
     }
 }
