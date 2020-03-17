@@ -201,13 +201,13 @@ namespace WebApps.Controllers
         public ActionResult LaporanHarian(string tgl)
         {
             DateTime reportDate;
-            if (tgl != null)
+            if (String.IsNullOrEmpty(tgl))
             {
-                reportDate = DateTime.Parse(tgl);
+                reportDate = DateTime.Now;
             }
             else
             {
-                reportDate = DateTime.Now;
+                reportDate = DateTime.Parse(tgl);
             }
             var tabelDoc = db.Documents.Where(doc => doc.DocWorkDate == reportDate).ToList();
             return View(tabelDoc);
