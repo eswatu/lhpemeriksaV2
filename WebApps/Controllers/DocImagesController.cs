@@ -238,7 +238,7 @@ namespace WebApps.Controllers
                 var selectDoc = db.Documents.Find(docImage.DocID);
                 db.Entry(selectDoc).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("LaporanHarian");
             }
 
             var dateCriteria = DateTime.Now.Date.AddDays(-4);

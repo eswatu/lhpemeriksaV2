@@ -1,0 +1,85 @@
+﻿@model WebApps.Models.DocImages
+
+@{
+    ViewBag.Title = "Details";
+    int i = 0;
+    int j = 0;
+}
+
+<h2>Detil</h2>
+
+<script src="~/Scripts/umd/popper.min.js"></script>
+
+<div>
+    <a href="@Url.Action("Index","DocImages")">
+        <button type="button" class="btn btn-info">Kembali Ke Menu</button>
+    </a>
+    <a href="@Url.Action("Edit","DocImages", new { id = Model.DocImagesID})">
+        <button type="button" class="btn btn-warning">Edit</button>
+    </a>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Document.DocNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Document.DocNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Document.DocOwner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Document.DocOwner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nomorKontainer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomorKontainer)
+        </dd>
+        <dd>
+            <p>File:</p>
+            <div id="carouselGaleri" class="carousel slide col-sm-6 align-content-center" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @foreach (var item in Model.ImgDetail)
+                    {
+                        <li data-target="#carouselGaleri" data-slide-to="@i" class="@(i == 0 ?"active":"")"></li>
+                        i++;
+                    }
+
+                </ol>
+                <div class="carousel-inner">
+                    @foreach (var item in Model.ImgDetail)
+                    {
+                        <div class="carousel-item @(j == 0 ? "active" : "")">
+                            <img src="@Url.Action("GetImg",new { pathImg = item.FileName})" alt="Foto kontener" class="d-block img-fluid" height="600" />
+                            @{j++;}
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselGaleri" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselGaleri" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </dd>
+    </dl>
+</div>
+<style>
+.carousel-inner > .item > img {
+  min-width: 100%;
+  width: 100%;
+}
+</style>
+

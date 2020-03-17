@@ -51,12 +51,20 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Galeri</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Galeri Pemeriksaan</a>
                     <div class="dropdown-menu" style="">
                         <a class="dropdown-item" href="@Url.Action("Create", "DocImages")">Tambah Baru</a>
                         <a class="dropdown-item" href="@Url.Action("LaporanHarian", "DocImages")">Lihat Dokumentasi Harian</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="@Url.Action("Index", "DocImages")">Lihat Semua Galeri</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Galeri Kegiatan</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="@Url.Action("Create", "EventImage")">Tambah Dokumentasi</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Index", "EventImage")">Semua Kegiatan</a>
                     </div>
                 </li>
                 @Html.Partial("_LoginPartial")
