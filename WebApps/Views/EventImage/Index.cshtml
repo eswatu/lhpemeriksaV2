@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<WebApps.ViewModel.GaleriKontener>
+﻿@model PagedList.IPagedList<WebApps.Models.EventImages>
 @using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -14,13 +14,13 @@
     <div class="col-md-auto">
         <form class="form-inline active-cyan-3 active-cyan-4">
             <i class="fas fa-search" aria-hidden="true"></i>
-            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Cari Kontainer" aria-label="Search" name="searchString">
+            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Cari Judul Acara" aria-label="Search" name="searchString">
             <button type="submit" class="btn-sm btn-primary">Cari</button>
         </form>
 
         <h2>Semua Dokumen : @ViewBag.nmPegawe</h2>
 
-        <a href="@Url.Action("Create", "DocImages")">
+        <a href="@Url.Action("Create", "EventImage")">
             <button type="button" class="btn btn-outline-primary">Buat Baru</button>
         </a>
 

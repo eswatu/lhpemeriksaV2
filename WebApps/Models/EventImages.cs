@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApps.Models
 {
@@ -14,8 +15,8 @@ namespace WebApps.Models
         [Key,Required]
         public int EventID { get; set;}
 
-        [Display(Name ="Tanggal Pelaksanaan")]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "datetime2"), Display(Name = "Tanggal Kegiatan")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EventDate { get; set; }
 
         [StringLength(80)]

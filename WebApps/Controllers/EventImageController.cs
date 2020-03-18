@@ -140,9 +140,12 @@ namespace WebApps.Controllers
         {
             if (ModelState.IsValid)
             {
-                evImage.direktori = System.DateTime.Now.ToString("yyyyMMddHHmmss");
-                string dirPath = PrepareFolder(evImage.direktori);
-
+                //input waktu sebagai string untuk membuat nama folder
+                string cDir = DateTime.Now.ToString("yyyyMMddHHmmss");
+                evImage.direktori = cDir;
+                //buat folder
+                string dirPath = PrepareFolder(cDir);
+                //loop setiap file untuk disimpan
                 List<ImgDetail> fileDetails = new List<ImgDetail>();
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
@@ -167,8 +170,6 @@ namespace WebApps.Controllers
                 evImage.ImgDetail = fileDetails;
                 db.EventImages.Add(evImage);
                 //bagian save /update dokumen
-                var selectDoc = db.Documents.Find(evImage.EventID);
-                db.Entry(selectDoc).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

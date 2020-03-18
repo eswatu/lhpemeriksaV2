@@ -1,10 +1,14 @@
-﻿@model WebApps.Models.DocImages
+﻿@model WebApps.Models.EventImages
 
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
+<link rel="stylesheet" href="~/Content/jquery-ui.css" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
 <div class="alert alert-dismissible alert-warning">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <h4 class="alert-heading">Perhatian!</h4>
@@ -16,30 +20,40 @@
     </a>
 </div>
 
-@using (Html.BeginForm("Edit","DocImages",null, FormMethod.Post, new { enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Edit", "DocImages", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    @Html.HiddenFor(model => model.DocImagesID)
+    @Html.HiddenFor(model => model.EventID)
     <fieldset>
         <div class="form-horizontal">
             <hr />
             <div class="form-group">
-                @Html.LabelFor(model => model.DocID, "DocID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("DocID", null, htmlAttributes: new { @class = "form-control"})
-                    @Html.ValidationMessageFor(model => model.DocID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control dtpick", placeholder = "dd/mm/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.nomorKontainer, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.EventTitle, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.nomorKontainer, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nomorKontainer, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.EventTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EventTitle, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.deskripsi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <textarea id="deskripsi" rows="4" class="form-control"></textarea>
+                    @*@Html.EditorFor(model => model.deskripsi, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.deskripsi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
             <div class="editor-field">
                 <div class="form-group">
                     <p>File:</p>
@@ -50,7 +64,7 @@
                     @foreach (var item in Model.ImgDetail)
                     {
                         <li>
-                                <img src="@Url.Action("DownImg",new { DocDir = Model.direktori, fileName = item.FileName})" alt="Foto kontener" height="80" />
+                            <img src="@Url.Action("DownImg",new { DocDir = Model.direktori, fileName = item.FileName})" alt="Foto kontener" height="80" />
                             <a href="javascript:void(0);" data-id="@item.Id" class="deleteItem">Hapus</a>
                         </li>
                     }
@@ -74,10 +88,10 @@
                        url: '@Url.Action("DeleteFile")',
                        type: 'POST',
                        data: { id: $(this).data('id') }
-                   }).done(function (data) {                  
+                   }).done(function (data) {
                        if (data.Result == "OK") {
                            $ctrl.closest('li').remove();
-                           $window.location.reload(true); 
+                           $window.location.reload(true);
                        }
                        else if (data.Result.Message) {
                            alert(data.Result.Message);
@@ -85,7 +99,7 @@
                    }).fail(function () {
                        alert("Ada yang salah, tanya admin.");
                    })
- 
+
                }
            });
 </script>
